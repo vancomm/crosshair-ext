@@ -6,7 +6,7 @@ const CROSSHAIR_SIZE_INCREMENT = 2;
 
 /** @returns {Promise<string|void>} */
 async function queryCurrentURL() {
-    const tabs = await chrome.tabs.query({active: true, currentWindow: true});
+    const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
     if (!Array.isArray(tabs) || tabs.length < 1) {
         return null;
     }
@@ -41,19 +41,18 @@ async function app() {
     }
 
     const storeName = url.split(/(?<![/:])\//, 1)[0];
-    
+
     const store = makeStore(storeName);
 
     /** @param {string} settingName */
-    function makeWheelHandler(settingName, {
-        increment = 2, 
-        min = 0, 
-        max = Infinity
-    } = {}) {
-        /** 
-         * @this {GlobalEventHandlers}
-         * @param {WheelEvent} e
-         */
+    function makeWheelHandler(
+        settingName,
+        { increment = 2, min = 0, max = Infinity } = {}
+    ) {
+    /**
+     * @this {GlobalEventHandlers}
+     * @param {WheelEvent} e
+     */
         return async function handleWheel(e) {
             const delta = increment * -1 * Math.sign(e.deltaY);
             let value = await store.get(settingName);
@@ -67,14 +66,12 @@ async function app() {
     }
 
     /** @param {string} settingName */
-    function makeNumberInputHandler(settingName, {
-        min = 0, 
-        max = Infinity
-    } = {}) {
+    function makeNumberInputHandler(
+        settingName,
+        { min = 0, max = Infinity } = {}
+    ) {
         return async function handleNumberInput() {
-            let value = this.value
-                .replace(/\D/g, '')
-                .replace(/(?<=^)0(?=\d)/, '');
+            let value = this.value.replace(/\D/g, '').replace(/(?<=^)0(?=\d)/, '');
             value = Number(value);
             value = Math.min(Math.max(value, min), max);
             value = value.toString();
@@ -85,9 +82,10 @@ async function app() {
 
     const cache = await store.get(null);
 
-    const settings = typeof cache !== 'object'
+    const settings =
+    typeof cache !== 'object'
         ? initialSettings
-        : {...initialSettings, ...cache};
+        : { ...initialSettings, ...cache };
 
     await store.set(settings);
 
@@ -97,7 +95,7 @@ async function app() {
 
     showCheckbox.onchange = function () {
         console.log(`showInput.checked is now ${this.checked}`);
-        store.set({show: this.checked});
+        store.set({ show: this.checked });
     };
 
     /** @type {HTMLInputElement} */
@@ -111,7 +109,7 @@ async function app() {
     /** @type {HTMLInputElement} */
     const colorInput = document.getElementById('color');
     colorInput.checked = settings.color;
-    
+
     colorInput.onchange = function () {
         store.set({ color: this.value });
     };
@@ -119,14 +117,14 @@ async function app() {
     /** @type {HTMLInputElement} */
     const sizeInput = document.getElementById('size');
     sizeInput.value = settings.size;
-        
+
     sizeInput.oninput = makeNumberInputHandler('size', {
-        max: MAX_CROSSHAIR_SIZE
+        max: MAX_CROSSHAIR_SIZE,
     });
 
     sizeInput.onwheel = makeWheelHandler('size', {
         increment: CROSSHAIR_SIZE_INCREMENT,
-        max: MAX_CROSSHAIR_SIZE
+        max: MAX_CROSSHAIR_SIZE,
     });
 
     /** @type {HTMLInputElement} */

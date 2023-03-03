@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./popup.css" />
+    <script type="module" src="./popup.js"></script>
+    <script type="module" src="./common.js"></script>
+  </head>
+
+  <body>
+    <h1>Crosshair</h1>
+
+    <div class="rows">
+      <div class="row">
+        <span>Show crosshair</span>
+        <input type="checkbox" class="slider-input" id="show" />
+        <label class="slider" for="show">
+          <div class="thumb"></div>
+        </label>
+      </div>
+
+      <div class="row">
+        <span>Use inverse color</span>
+        <input type="checkbox" class="slider-input" id="inverse" />
+        <label class="slider" for="inverse">
+          <div class="thumb"></div>
+        </label>
+      </div>
+
+      <div class="row">
+        <label for="ch-color">Crosshair color</label>
+        <input type="color" id="color" value="#ff0000" />
+      </div>
+
+      <div class="row">
+        <label for="size">Crosshair size</label>
+        <input type="text" id="size" class="number-input" value="5" />
+      </div>
+
+      <div class="row">
+        <span>Use absolute coordinates</span>
+        <input type="checkbox" class="slider-input" id="absolute" />
+        <label class="slider" for="absolute">
+          <div class="thumb"></div>
+        </label>
+      </div>
+
+      <div class="row">
+        <label for="size">X coordinate</label>
+        <input type="text" id="x" class="number-input" value="50" />
+      </div>
+
+      <div class="row">
+        <label for="size">Y coordinate</label>
+        <input type="text" id="y" class="number-input" value="50" />
+      </div>
+
+      <div class="row justify-center">
+        <input type="checkbox" class="toggle-input" id="is-placing" />
+        <label class="toggle" for="is-placing">Place with mouse</label>
+      </div>
+
+      <div class="row justify-center">
+        <button type="button" class="danger" id="restore">
+          Restore defaults
+        </button>
+      </div>
+    </div>
+
+    <div class="veil" id="veil" style="display: none">
+      <p class="message">This extension should only be used on webpages</p>
+    </div>
+  </body>
+</html>
