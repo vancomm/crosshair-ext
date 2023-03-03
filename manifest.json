@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "Crosshair",
+  "description": "Adds a crosshair to the page",
+  "version": "0.1",
+  "action": {
+    "default_popup": "./popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "./content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "resources": [
+        "content-main.js",
+        "common.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage"
+  ]
+}

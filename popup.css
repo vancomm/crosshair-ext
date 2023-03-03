@@ -1,0 +1,125 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html {
+  --bg-inactive: #555;
+  --bg-active: #399cfe;
+  --bg-danger: #eb3535;
+
+  position: relative;
+  width: 13em;
+  background-color: #333;
+  font-family: sans-serif;
+  color: white;
+}
+
+.veil {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  padding: 1em;
+  display: grid;
+  place-items: center;
+  background-color: rgba(0, 0, 0, .9);
+}
+
+.veil .message {
+  text-align: center;
+}
+
+button,
+.toggle {
+  all: unset;
+  user-select: none;
+  cursor: pointer;
+  display: block;
+  padding-block: .5em;
+  padding-inline: 1em;
+  text-align: center;
+  background-color: #555;
+  transition: background-color 75ms;
+}
+
+button:hover,
+.toggle:hover {
+  background-color: #777;
+}
+
+button:active {
+  background-color: #aaa;
+}
+
+button.danger {
+  background-color: var(--bg-danger);
+}
+
+.justify-center {
+  justify-content: center !important;
+}
+
+.rows {
+  display: grid;
+  grid-auto-rows: 1fr;
+  row-gap: .3em;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .5em;
+}
+
+.number-input {
+  width: 4em;
+}
+
+.slider-input {
+  display: none;
+}
+
+.slider {
+  --slider-width: 4em;
+  --slider-height: 2em;
+  --duration: 200ms;
+  cursor: pointer;
+  display: block;
+  flex-shrink: 0;
+  width: var(--slider-width);
+  height: var(--slider-height);
+  border-radius: 99999em;
+  background: linear-gradient(to right, var(--bg-active) 50%, var(--bg-inactive) 50%);
+  background-position: right;
+  background-size: 200% 100%;
+  transition: background-position var(--duration);
+}
+
+:checked~.slider {
+  background-position: left;
+}
+
+.thumb {
+  display: block;
+  width: var(--slider-height);
+  height: 100%;
+  border-radius: 99999em;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, .4) 0 0 .4em .08em;
+  transition: translate var(--duration);
+}
+
+:checked~.slider .thumb {
+  translate: calc(var(--slider-width) - var(--slider-height)) 0;
+}
+
+.toggle-input {
+  display: none;
+}
+
+:checked~.toggle {
+  background-color: var(--bg-active);
+}
