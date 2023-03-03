@@ -7,7 +7,6 @@ function removeCrosshair() {
     [...targets].forEach((target) => target.remove());
 }
 
-/** @param {{show: boolean}} state */
 function render({ show, inverse, color, size, absolute, x, y }) {
     removeCrosshair();
     if (!show) {
@@ -22,7 +21,7 @@ function render({ show, inverse, color, size, absolute, x, y }) {
     ch.style.position = 'fixed';
     ch.style.top = '50%';
     ch.style.left = '50%';
-    ch.zIndex = '9999999';
+    ch.style.zIndex = '9999999';
 
     ch.style.width = `${size}px`;
     ch.style.aspectRatio = '1 / 1';
@@ -68,13 +67,15 @@ export async function main() {
      * @param {MouseEvent} e 
      */
     function handlePlaceWithMouse(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
         store.set({ 
             x: e.clientX, 
             y: e.clientY,
             isPlacing: false,
         });
         console.log('finished placing');
-        this.removeEventListener('click', handlePlaceWithMouse);
+        this.removeEventListener('click', handlePlaceWithMouse, true);
     }
     
     for (const key in cache) {
@@ -83,7 +84,7 @@ export async function main() {
     }
 
     if (state.isPlacing) {
-        window.addEventListener('click', handlePlaceWithMouse);
+        window.addEventListener('click', handlePlaceWithMouse, true);
     }
 
     store.addListener((changes) => {
@@ -95,7 +96,7 @@ export async function main() {
             state[key] = changes.newValue[key];
         }
         if (state.isPlacing) {
-            window.addEventListener('click', handlePlaceWithMouse);
+            window.addEventListener('click', handlePlaceWithMouse, true);
         }
     });
 }
