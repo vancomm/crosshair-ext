@@ -1,76 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./popup.css" />
-    <script type="module" src="./popup.js"></script>
-    <script type="module" src="./common.js"></script>
-  </head>
 
-  <body>
-    <h1>Crosshair</h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./popup.css" />
+  <script type="module" src="./popup.js"></script>
+  <script type="module" src="./common.js"></script>
+</head>
 
-    <div class="settings">
-      <span>Show crosshair</span>
-      <div>
-        <input type="checkbox" class="slider-input" id="show" />
-        <label class="slider" for="show">
-          <div class="thumb"></div>
-        </label>
-      </div>
+<body>
 
-      <span>Use inverse color</span>
-      <div>
-        <input type="checkbox" class="slider-input" id="inverse" />
-        <label class="slider" for="inverse">
-          <div class="thumb"></div>
-        </label>
-      </div>
-
-      <label for="ch-color">Crosshair color</label>
-      <input type="color" id="color" value="#ff0000" />
-
-      <label for="opacity">Crosshair opacity</label>
-      <input type="text" id="opacity" class="number-input" value="100" />
-
-      <label for="size">Crosshair size</label>
-      <input type="text" id="size" class="number-input" value="5" />
-
-      <span>
-        Use absolute coordinates
-        <sup class="tooltip" data-tooltip="with origin in top left corner">
-          (?)
-        </sup>
-      </span>
-      <div>
-        <input type="checkbox" class="slider-input" id="absolute" />
-        <label class="slider" for="absolute">
-          <div class="thumb"></div>
-        </label>
-      </div>
-
-      <label for="size">X coordinate</label>
-      <input type="text" id="x" class="number-input" value="50" />
-
-      <label for="size">Y coordinate</label>
-      <input type="text" id="y" class="number-input" value="50" />
-
-      <div class="span-2 m-auto">
-        <input type="checkbox" class="toggle-input" id="is-placing" />
-        <label class="toggle" for="is-placing">Place with mouse</label>
-      </div>
-
-      <div class="span-2 m-auto">
-        <button type="button" class="danger" id="restore">
-          Restore defaults
-        </button>
-      </div>
+  <div class="settings">
+    <label class="toggle" for="show">
+      <h1>Crosshair</h1>
+    </label>
+    <div>
+      <input type="checkbox" class="d-none" id="show" data-initial-value="false" />
+      <label class="slider" for="show">
+        <div class="thumb"></div>
+      </label>
     </div>
 
-    <div class="veil" id="veil" style="display: none">
-      <p class="message">This extension should only be used on webpages</p>
+
+    <h4 class="p-bl-half span-2">Shape</h4>
+    <div class="d-none span-2"></div>
+
+    <label class="toggle m-l-half" for="dot">Show dot</label>
+    <div>
+      <input type="checkbox" class="d-none" id="dot" data-default-value="false" />
+      <label class="slider" for="dot">
+        <div class="thumb"></div>
+      </label>
     </div>
-  </body>
+
+    <label class="toggle m-l-half" for="lines">Show lines</label>
+    <div>
+      <input type="checkbox" class="d-none" id="lines" data-default-value="true" />
+      <label class="slider" for="lines">
+        <div class="thumb"></div>
+      </label>
+    </div>
+
+    <label class="m-l-half" for="size">Thickness</label>
+    <input type="number" class="w-4" id="thickness" max="9999" step="1" data-default-value="4" />
+
+    <label class="m-l-half" for="width">Length</label>
+    <input type="number" class="w-4" id="length" max="9999" step="1" data-default-value="15" />
+
+
+    <h4 class="p-bl-half span-2">Color</h4>
+    <div class="d-none span-2"></div>
+
+    <label class="toggle m-l-half" for="invert">Invert background</label>
+    <div>
+      <input type="checkbox" class="d-none" id="invert" data-default-value="false" />
+      <label class="slider" for="invert">
+        <div class="thumb"></div>
+      </label>
+    </div>
+
+    <label class="m-l-half" for="ch-color">Crosshair color</label>
+    <input type="color" id="color" data-default-value="#00ff00" />
+
+    <label class="m-l-half" for="opacity">Crosshair opacity</label>
+    <input type="number" class="w-4" id="opacity" min="0" max="100" step="2" data-default-value="100" />
+
+
+    <h4 class="p-bl-half span-2">Position</h4>
+    <div class="d-none span-2"></div>
+
+    <label class="toggle m-l-half" for="absolute">
+      Use absolute coordinates
+      <sup class="tooltip" data-tooltip="with origin in top left corner">(?)</sup>
+    </label>
+    <div>
+      <input type="checkbox" class="d-none" id="absolute" data-default-value="false" />
+      <label class="slider" for="absolute">
+        <div class="thumb"></div>
+      </label>
+    </div>
+
+    <label class="m-l-half" for="size">X coordinate</label>
+    <input type="number" id="x" class="w-4" data-default-value="50" />
+
+    <label class="m-l-half" for="size">Y coordinate</label>
+    <input type="number" id="y" class="w-4" data-default-value="50" />
+
+    <div class="span-2 m-auto">
+      <input type="checkbox" class="d-none" id="place" data-default-value="false" />
+      <label class="toggle-button" for="place">Place with mouse</label>
+    </div>
+
+    <button type="button" class="danger span-2 m-auto" id="restore">
+      Restore defaults
+    </button>
+  </div>
+
+  <div class="veil" id="veil" data-show="false">
+    <p class="message">This extension should only be used on webpages</p>
+  </div>
+
+  <!-- <div class="lines">
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+  </div> -->
+</body>
+
 </html>

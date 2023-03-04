@@ -2,25 +2,69 @@
 *::after,
 *::before {
   box-sizing: border-box;
+  font-size: inherit;
 }
 
 html {
   --bg-inactive: #555;
   --bg-active: #399cfe;
   --bg-danger: #eb3535;
-  --color-inactive: #aaa;
+  --color-inactive: #777;
+  --separator: #666;
 
   position: relative;
-  width: 13em;
+  width: 15em;
   background-color: #333;
   font-family: sans-serif;
   color: white;
 }
 
+h1,
+h2,
+h3 {
+  margin: unset;
+  padding: unset;
+  padding-block: .5em;
+  font-size: 2em;
+}
+
+/* Utility */
+
+.m-auto {
+  margin: auto;
+}
+
+.m-l-half {
+  margin-left: .5em;
+}
+
+.p-bl-half {
+  padding-block: .1em;
+}
+
+.w-4 {
+  width: 4em;
+}
+
+.d-none {
+  display: none;
+}
+
+.span-2 {
+  grid-column: 1 / 3;
+}
+
+.danger {
+  background-color: var(--bg-danger) !important;
+}
+
+/* Components */
+
 .veil {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 9999999;
   height: 100%;
   padding: 1em;
   display: grid;
@@ -28,8 +72,16 @@ html {
   background-color: rgba(0, 0, 0, .9);
 }
 
+.veil[data-show='false'] {
+  display: none;
+}
+
 .veil .message {
   text-align: center;
+}
+
+.toggle {
+  cursor: pointer;
 }
 
 .settings {
@@ -46,22 +98,17 @@ html {
   margin-inline: auto;
 }
 
-.span-2 {
-  grid-column: 1 / 3;
-}
-
-.m-auto {
-  margin: auto;
+.separator {
+  margin-block: .2em;
+  height: .1em;
+  background: var(--separator)
 }
 
 .tooltip {
   cursor: pointer;
   position: relative;
+  z-index: 100;
   color: var(--color-inactive);
-}
-
-.tooltip {
-  color: #777;
 }
 
 .tooltip:hover::after {
@@ -81,7 +128,7 @@ html {
 }
 
 button,
-.toggle {
+.toggle-button {
   all: unset;
   user-select: none;
   cursor: pointer;
@@ -94,7 +141,7 @@ button,
 }
 
 button:hover,
-.toggle:hover {
+.toggle-button:hover {
   background-color: #777;
   transition: background-color 80ms ease-out;
 }
@@ -103,21 +150,13 @@ button:active {
   background-color: #aaa;
 }
 
-button.danger {
-  background-color: var(--bg-danger);
-}
-
-.number-input {
-  width: 4em;
-}
-
-.slider-input {
-  display: none;
+:checked~.toggle-button {
+  background-color: var(--bg-active);
 }
 
 .slider {
-  --slider-width: 4em;
-  --slider-height: 2em;
+  --slider-width: 3em;
+  --slider-height: 1.5em;
   --duration: 200ms;
   cursor: pointer;
   display: block;
@@ -149,10 +188,46 @@ button.danger {
   translate: calc(var(--slider-width) - var(--slider-height)) 0;
 }
 
-.toggle-input {
-  display: none;
+/* .lines {
+  --width: 6px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: var(--width);
+  aspect-ratio: 1 / 1;
+  background-color: blue;
 }
 
-:checked~.toggle {
-  background-color: var(--bg-active);
+.line {
+  position: absolute;
+  background-color: red;
 }
+
+.line:nth-child(1) {
+  top: 0;
+  left: 100%;
+  width: calc(3 * var(--width));
+  height: var(--width);
+}
+
+.line:nth-child(2) {
+  bottom: 100%;
+  left: 0;
+  width: var(--width);
+  height: calc(3 * var(--width));
+}
+
+.line:nth-child(3) {
+  top: 0;
+  right: 100%;
+  width: calc(3 * var(--width));
+  height: var(--width);
+}
+
+.line:nth-child(4) {
+  top: 100%;
+  left: 0;
+  width: var(--width);
+  height: calc(3 * var(--width));
+} */
