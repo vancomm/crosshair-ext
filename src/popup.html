@@ -12,57 +12,57 @@
   <body>
     <h1>Crosshair</h1>
 
-    <div class="rows">
-      <div class="row">
-        <span>Show crosshair</span>
+    <div class="settings">
+      <span>Show crosshair</span>
+      <div>
         <input type="checkbox" class="slider-input" id="show" />
         <label class="slider" for="show">
           <div class="thumb"></div>
         </label>
       </div>
 
-      <div class="row">
-        <span>Use inverse color</span>
+      <span>Use inverse color</span>
+      <div>
         <input type="checkbox" class="slider-input" id="inverse" />
         <label class="slider" for="inverse">
           <div class="thumb"></div>
         </label>
       </div>
 
-      <div class="row">
-        <label for="ch-color">Crosshair color</label>
-        <input type="color" id="color" value="#ff0000" />
-      </div>
+      <label for="ch-color">Crosshair color</label>
+      <input type="color" id="color" value="#ff0000" />
 
-      <div class="row">
-        <label for="size">Crosshair size</label>
-        <input type="text" id="size" class="number-input" value="5" />
-      </div>
+      <label for="opacity">Crosshair opacity</label>
+      <input type="text" id="opacity" class="number-input" value="100" />
 
-      <div class="row">
-        <span>Use absolute coordinates</span>
+      <label for="size">Crosshair size</label>
+      <input type="text" id="size" class="number-input" value="5" />
+
+      <span>
+        Use absolute coordinates
+        <sup class="tooltip" data-tooltip="with origin in top left corner">
+          (?)
+        </sup>
+      </span>
+      <div>
         <input type="checkbox" class="slider-input" id="absolute" />
         <label class="slider" for="absolute">
           <div class="thumb"></div>
         </label>
       </div>
 
-      <div class="row">
-        <label for="size">X coordinate</label>
-        <input type="text" id="x" class="number-input" value="50" />
-      </div>
+      <label for="size">X coordinate</label>
+      <input type="text" id="x" class="number-input" value="50" />
 
-      <div class="row">
-        <label for="size">Y coordinate</label>
-        <input type="text" id="y" class="number-input" value="50" />
-      </div>
+      <label for="size">Y coordinate</label>
+      <input type="text" id="y" class="number-input" value="50" />
 
-      <div class="row justify-center">
+      <div class="span-2 m-auto">
         <input type="checkbox" class="toggle-input" id="is-placing" />
         <label class="toggle" for="is-placing">Place with mouse</label>
       </div>
 
-      <div class="row justify-center">
+      <div class="span-2 m-auto">
         <button type="button" class="danger" id="restore">
           Restore defaults
         </button>

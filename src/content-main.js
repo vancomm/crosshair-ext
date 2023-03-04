@@ -7,7 +7,7 @@ function removeCrosshair() {
     [...targets].forEach((target) => target.remove());
 }
 
-function render({ show, inverse, color, size, absolute, x, y }) {
+function render({ show, inverse, color, opacity, size, absolute, x, y }) {
     removeCrosshair();
     if (!show) {
         console.log('not rendering crosshair');
@@ -29,6 +29,7 @@ function render({ show, inverse, color, size, absolute, x, y }) {
     ch.style.translate = '-50% -50%';
 
     ch.style.background = color;
+    ch.style.opacity = (opacity / 100).toFixed(2);
 
     if (inverse) {
         ch.style.background = 'white';

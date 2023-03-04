@@ -15,10 +15,6 @@
       "error",
       4
     ],
-    "linebreak-style": [
-      "error",
-      "linux"
-    ],
     "quotes": [
       "error",
       "single"

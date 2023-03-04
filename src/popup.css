@@ -8,6 +8,7 @@ html {
   --bg-inactive: #555;
   --bg-active: #399cfe;
   --bg-danger: #eb3535;
+  --color-inactive: #aaa;
 
   position: relative;
   width: 13em;
@@ -31,6 +32,54 @@ html {
   text-align: center;
 }
 
+.settings {
+  display: grid;
+  grid-template-columns: 6fr 1fr;
+  row-gap: .5em;
+}
+
+.settings>* {
+  margin-block: auto;
+}
+
+.settings>*:nth-child(2n) {
+  margin-inline: auto;
+}
+
+.span-2 {
+  grid-column: 1 / 3;
+}
+
+.m-auto {
+  margin: auto;
+}
+
+.tooltip {
+  cursor: pointer;
+  position: relative;
+  color: var(--color-inactive);
+}
+
+.tooltip {
+  color: #777;
+}
+
+.tooltip:hover::after {
+  cursor: pointer;
+  content: attr(data-tooltip);
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  translate: -50% -100%;
+  width: max-content;
+  padding-block: .1em;
+  padding-inline: .3em;
+  border-radius: .3em;
+  background-color: #111;
+  color: white;
+}
+
 button,
 .toggle {
   all: unset;
@@ -41,12 +90,13 @@ button,
   padding-inline: 1em;
   text-align: center;
   background-color: #555;
-  transition: background-color 75ms;
+  transition: background-color 125ms ease-out;
 }
 
 button:hover,
 .toggle:hover {
   background-color: #777;
+  transition: background-color 80ms ease-out;
 }
 
 button:active {
@@ -55,23 +105,6 @@ button:active {
 
 button.danger {
   background-color: var(--bg-danger);
-}
-
-.justify-center {
-  justify-content: center !important;
-}
-
-.rows {
-  display: grid;
-  grid-auto-rows: 1fr;
-  row-gap: .3em;
-}
-
-.row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: .5em;
 }
 
 .number-input {
