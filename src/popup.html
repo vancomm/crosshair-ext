@@ -5,93 +5,105 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./utility.css" />
   <link rel="stylesheet" href="./popup.css" />
-  <script type="module" src="./popup.js"></script>
   <script type="module" src="./common.js"></script>
+  <script type="module" src="./popup.js"></script>
 </head>
 
 <body>
 
-  <div class="settings">
-    <label class="toggle" for="show">
-      <h1>Crosshair</h1>
+  <div class="d-flex fd-c g-qtr" id="settings">
+    <section class="grid">
+      <label class="toggle" for="show">
+        <h1>Crosshair</h1>
+      </label>
+      <div>
+        <input type="checkbox" class="d-none" id="show" data-initial-value="false" />
+        <label class="slider" for="show">
+          <div class="thumb"></div>
+        </label>
+      </div>
+    </section>
+
+    <input type="checkbox" class="collapse-input d-none" id="section-shape" data-initial-value="false">
+    <label class="collapse-title" for="section-shape">
+      <h4 class="d-inline">Shape</h4>
     </label>
-    <div>
-      <input type="checkbox" class="d-none" id="show" data-initial-value="false" />
-      <label class="slider" for="show">
-        <div class="thumb"></div>
-      </label>
-    </div>
 
+    <section class="grid collapsible" data-id="section-shape" data-collapsed="false">
+      <label class="toggle m-l-half" for="dot">Show dot</label>
+      <div>
+        <input type="checkbox" class="d-none" id="dot" data-default-value="false" />
+        <label class="slider" for="dot">
+          <div class="thumb"></div>
+        </label>
+      </div>
 
-    <h4 class="p-bl-half span-2">Shape</h4>
-    <div class="d-none span-2"></div>
+      <label class="toggle m-l-half" for="lines">Show lines</label>
+      <div>
+        <input type="checkbox" class="d-none" id="lines" data-default-value="true" />
+        <label class="slider" for="lines">
+          <div class="thumb"></div>
+        </label>
+      </div>
 
-    <label class="toggle m-l-half" for="dot">Show dot</label>
-    <div>
-      <input type="checkbox" class="d-none" id="dot" data-default-value="false" />
-      <label class="slider" for="dot">
-        <div class="thumb"></div>
-      </label>
-    </div>
+      <label class="m-l-half" for="size">Thickness</label>
+      <input type="number" class="w-4" id="thickness" max="9999" step="1" data-default-value="4" />
 
-    <label class="toggle m-l-half" for="lines">Show lines</label>
-    <div>
-      <input type="checkbox" class="d-none" id="lines" data-default-value="true" />
-      <label class="slider" for="lines">
-        <div class="thumb"></div>
-      </label>
-    </div>
+      <label class="m-l-half" for="width">Length</label>
+      <input type="number" class="w-4" id="length" max="9999" step="1" data-default-value="15" />
+    </section>
 
-    <label class="m-l-half" for="size">Thickness</label>
-    <input type="number" class="w-4" id="thickness" max="9999" step="1" data-default-value="4" />
-
-    <label class="m-l-half" for="width">Length</label>
-    <input type="number" class="w-4" id="length" max="9999" step="1" data-default-value="15" />
-
-
-    <h4 class="p-bl-half span-2">Color</h4>
-    <div class="d-none span-2"></div>
-
-    <label class="toggle m-l-half" for="invert">Invert background</label>
-    <div>
-      <input type="checkbox" class="d-none" id="invert" data-default-value="false" />
-      <label class="slider" for="invert">
-        <div class="thumb"></div>
-      </label>
-    </div>
-
-    <label class="m-l-half" for="ch-color">Crosshair color</label>
-    <input type="color" id="color" data-default-value="#00ff00" />
-
-    <label class="m-l-half" for="opacity">Crosshair opacity</label>
-    <input type="number" class="w-4" id="opacity" min="0" max="100" step="2" data-default-value="100" />
-
-
-    <h4 class="p-bl-half span-2">Position</h4>
-    <div class="d-none span-2"></div>
-
-    <label class="toggle m-l-half" for="absolute">
-      Use absolute coordinates
-      <sup class="tooltip" data-tooltip="with origin in top left corner">(?)</sup>
+    <input type="checkbox" class="collapse-input d-none" id="section-color" data-initial-value="false">
+    <label class="collapse-title" for="section-color">
+      <h4 class="d-inline">Color</h4>
     </label>
-    <div>
-      <input type="checkbox" class="d-none" id="absolute" data-default-value="false" />
-      <label class="slider" for="absolute">
-        <div class="thumb"></div>
+
+    <section class="grid collapsible" data-id="section-color" data-collapsed="false">
+      <label class="toggle m-l-half" for="invert">Invert background</label>
+      <div>
+        <input type="checkbox" class="d-none" id="invert" data-default-value="false" />
+        <label class="slider" for="invert">
+          <div class="thumb"></div>
+        </label>
+      </div>
+
+      <label class="m-l-half" for="ch-color">Crosshair color</label>
+      <input type="color" id="color" data-default-value="#00ff00" />
+
+      <label class="m-l-half" for="opacity">Crosshair opacity</label>
+      <input type="number" class="w-4" id="opacity" min="0" max="100" step="2" data-default-value="100" />
+    </section>
+
+    <input type="checkbox" class="collapse-input d-none" id="section-position" data-initial-value="false">
+    <label class="collapse-title" for="section-position">
+      <h4 class="d-inline">Position</h4>
+    </label>
+
+    <section class="grid collapsible" data-id="section-position" data-collapsed="false">
+      <label class="toggle m-l-half" for="absolute">
+        Use absolute coordinates
+        <sup class="tooltip" data-tooltip="with origin in top left corner">(?)</sup>
       </label>
-    </div>
+      <div>
+        <input type="checkbox" class="d-none" id="absolute" data-default-value="false" />
+        <label class="slider" for="absolute">
+          <div class="thumb"></div>
+        </label>
+      </div>
 
-    <label class="m-l-half" for="size">X coordinate</label>
-    <input type="number" id="x" class="w-4" data-default-value="50" />
+      <label class="m-l-half" for="size">X coordinate</label>
+      <input type="number" id="x" class="w-4" data-default-value="50" />
 
-    <label class="m-l-half" for="size">Y coordinate</label>
-    <input type="number" id="y" class="w-4" data-default-value="50" />
+      <label class="m-l-half" for="size">Y coordinate</label>
+      <input type="number" id="y" class="w-4" data-default-value="50" />
 
-    <div class="span-2 m-auto">
-      <input type="checkbox" class="d-none" id="place" data-default-value="false" />
-      <label class="toggle-button" for="place">Place with mouse</label>
-    </div>
+      <div class="span-2 m-auto">
+        <input type="checkbox" class="d-none" id="place" data-default-value="false" />
+        <label class="toggle-button" for="place">Place with mouse</label>
+      </div>
+    </section>
 
     <button type="button" class="danger span-2 m-auto" id="restore">
       Restore defaults

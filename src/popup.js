@@ -1,9 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { makeStore } from './common.js';
 
-/** @type {Array<HTMLInputElement>} */
-const inputs = [...document.querySelectorAll('.settings input')];
-
 /**
  * @param {Array<HTMLInputElement>} inputs 
  * @param {string} key
@@ -22,13 +19,6 @@ function extractDataAttributes(inputs, key) {
     }, {});
 }
 
-const defaultSettings = extractDataAttributes(inputs, 'defaultValue');
-
-const initialSettings = { 
-    ...extractDataAttributes(inputs, 'initialValue'), 
-    ...defaultSettings
-};
-
 /** @returns {Promise<string|void>} */
 async function queryCurrentURL() {
     const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -38,8 +28,18 @@ async function queryCurrentURL() {
     return tabs[0].url;
 }
 
+/** @type {Array<HTMLInputElement>} */
+const inputs = [...document.querySelectorAll('#settings input')];
+
+const defaultSettings = extractDataAttributes(inputs, 'defaultValue');
+
+const initialSettings = { 
+    ...extractDataAttributes(inputs, 'initialValue'), 
+    ...defaultSettings
+};
+
 async function app() {
-    if (!chrome) {
+    if (!window.chrome) {
         return;
     }
 
@@ -60,6 +60,23 @@ async function app() {
         : { ...initialSettings, ...cache };
 
     await store.set(settings);
+
+    /** @type {Array<HTMLInputElement>} */
+    const collapseInputs = [...document.getElementsByClassName('collapse-input')];
+
+    collapseInputs.forEach((input) => {
+        /** @type {HTMLElement|null} */
+        const collapsible = document.querySelector(`.collapsible[data-id='${input.id}']`);
+        console.log(collapsible);
+        if (!collapsible) {
+            return;
+        }
+        collapsible.style.maxHeight = `${collapsible.offsetHeight}px`;
+        collapsible.dataset.collapsed = settings[input.id];
+        input.addEventListener('change', function () {
+            collapsible.dataset.collapsed = this.checked;
+        });
+    });
 
     /** @param {string} storeId */
     const makeNumberInputHandler = (storeId, { min = 0, max = Infinity } = {}) => 
